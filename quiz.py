@@ -1,6 +1,9 @@
-quiz_text
+easy_quiz = "Easy quiz __1__, __2__, __3__."
+medium_quiz = "Medium quiz __1__, __2__, __3__."
+hard_quiz = "Hard quiz __1__, __2__, __3__."
 
-def difficulty_level():
+def difficulty_level(level):
+#allows user to select difficulty level easy, medium, hard
     diff = ""
     while (diff != "easy") or (diff != "medium") or (diff != "hard"):
         diff = raw_input("Select your difficulty level: easy, medium or hard.")
@@ -15,4 +18,33 @@ def difficulty_level():
             print "You chose hard."
         else:
             print "Please select easy, medium or hard."
-difficulty_level()
+    return quiz_text
+
+def guesses(number):
+    while number_of_guesses :
+        pass
+
+def blank_finder(quiz_string):
+    i = 0
+    for word in quiz_string:
+        if "__" not in word:
+            return word
+        else:
+            i = i + 1
+            return i
+
+
+def play_game(quiz_string, answers):
+    quiz_text = difficulty_level(level)
+    #replaced = []
+    quiz_string = quiz_text.split()
+    for word in quiz_string:
+        replacement = word_in_pos(word, parts_of_speech)
+    #    if replacement != None:
+    #        user_input = raw_input("Type in a: " + replacement + " ")
+    #        word = word.replace(replacement, user_input)
+    #        replaced.append(word)
+    #    else:
+            replaced.append(word)
+    #replaced = " ".join(replaced)
+    #return replaced
