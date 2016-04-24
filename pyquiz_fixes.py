@@ -1,9 +1,10 @@
-medium_quiz = "Medium quiz __1__, __2__, __3__."
 easy_quiz = "Easy quiz __1__ __2__ __3__ __1__"
+medium_quiz = "Medium quiz __1__, __2__, __3__."
 hard_quiz = "Hard quiz __1__ __2__ __3__"
 easy_key = ['alpha', 'beta', 'carrot']
 medium_key = ['dog', 'echo', 'fox']
 hard_key = ['ghost', 'hopper', 'icecream']
+blanks = ['__1__','__2__','__3__']
 
 
 def difficulty_level():
@@ -40,11 +41,11 @@ def guesses():
             print 'You will get ' + str(number_of_guesses) + ' guesses per question.'
         return number_of_guesses
 
-    for word in quiz_string:
-        if "__" not in word:
-            return word
-        else:
-            None
+def blank_finder(word, qs, qi):
+    for word in qs:
+        if blanks[question_index] in word == True:
+            word = quiz_string[question_index]
+
 
 def play_game():
     quiz_text = []
@@ -62,6 +63,7 @@ def play_game():
         quiz_key = hard_key
 
     attempts = guesses()
+    reset = attempts
     print quiz_text
     question_index = 0
     quiz_string = quiz_text.split()
@@ -69,12 +71,16 @@ def play_game():
     while (question_index < len(quiz_key)) and attempts > 0:
         answer = raw_input('What word belongs in blank number '
         + str(question_index + 1) + '? ')
+        answer = answer.lower()
         if answer == quiz_key[question_index]:
             print "Correct!"
-            quiz_string[replace] = quiz_key[question_index]
+            blank_finder(blanks, quiz_string, question_index)
             amended_text = " ".join(quiz_string)
             print amended_text
             question_index += 1
+            attempts = reset
+            if question_index == len(quiz_key):
+                print "You slayed the dragon!!!"
         else:
             print "Wrong!"
             attempts = attempts - 1
